@@ -46,7 +46,7 @@ class randomCards:
 
     def type():
         cardsType = Card.where(page = randint(1, 1200)).where(pageSize=50).all()
-        typeRandNum = randint(1, 85)
+        typeRandNum = randint(1, 25)
         type = cardsType[typeRandNum].type
         return type
 
@@ -71,7 +71,7 @@ class randomCards:
     def text():
         #get oracle text of the card and information
         cardsText = Card.where(page = randint(1, 1200)).where(pageSize=50).all()
-        textRandNum = randint(1, 85)
+        textRandNum = randint(1, 20)
         text = cardsText[textRandNum].text
         return text
     
@@ -89,7 +89,7 @@ class randomCards:
     def number():
         #get the card's number
         cardsNumber = Card.where(page = randint(1, 1200)).where(pageSize=50).all()
-        numRandNum = randint(1, 85)
+        numRandNum = randint(1, 25)
         number = cardsNumber[numRandNum].number
         return number
 
