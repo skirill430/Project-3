@@ -1,5 +1,6 @@
 from mtgsdk import Card
 from array import array
+import collections
 import mergeSort
 from randomCards import randomCards
 
@@ -100,66 +101,51 @@ elif(menuSelect == '2' and deckSel == '1'):
         print("5. Rarity") 
         print("6. Number")
         print("7. ID")
+        print(" ")
         displayOption = input("Select: ")
         #print out the specified information with the card's name
         if(displayOption == '1'):
             print(" ")
             print("Cards and their mana cost: ")
             for x in cards2:
-                if(not x.mana_cost):
-                    print(x.name + '\t' + '\t' + 'None')
-                else:
-                    print(x.name + '\t' + '\t' + x.mana_cost)
+                res = collections.ChainMap(x.name, x.mana_cost)
+                print(res.maps,'\n')
         elif(displayOption == '2'):
             print(" ")
             print("Cards and their type: ")
             for x in cards2:
-                if(not x.type):
-                    print(x.name + '\t' + '\t' + 'None')
-                else:
-                    print(x.name + '\t' + '\t' + x.type)
+                res = collections.ChainMap(x.name, x.type)
+                print(res.maps,'\n')
         elif(displayOption == '3'):
             print(" ")
             print("Cards and their supertypes: ")
             for x in cards2:
-                if(not x.supertypes):
-                    print(x.name + '\t' + '\t' + 'None')
-                else:
-                    for y in x.supertypes:
-                        print(x.name + '\t' + '\t' + y)
+                res = collections.ChainMap(x.name, x.supertypes)
+                print(res.maps,'\n')
         elif(displayOption == '4'):
             print(" ")
             print("Cards and their subtypes: ")
             for x in cards2:
-                if(not x.subtypes):
-                    print(x.name + '\t' + '\t' + 'None')
-                else:
-                    for y in x.subtypes:
-                        print(x.name + '\t' + '\t' + y)
+                res = collections.ChainMap(x.name, x.subtypes)
+                print(res.maps,'\n')
         elif(displayOption == '5'):
             print(" ")
             print("Cards and their rarity: ")
             for x in cards2:
-                if(not x.rarity):
-                    print(x.name + '\t' + '\t' + 'None')
-                else:
-                    print(x.name + '\t' + x.rarity)
+                res = collections.ChainMap(x.name, x.rarity)
+                print(res.maps,'\n')
         elif(displayOption == '6'):
             print(" ")
             print("Cards and their number: ")
             for x in cards2:
-                if(not x.number):
-                    print(x.name + '\t' + '\t' + 'None')
-                else:
-                    print(x.name + '\t' + x.number)
+                res = collections.ChainMap(x.name, x.number)
+                print(res.maps,'\n')
         elif(displayOption == '7'):
             print(" ")
             print("Cards and their ID: ")
             for x in cards2:
-                if(not x.id):
-                    print(x.name + '\t' + '\t' + 'None')
-                else:
-                    print(x.name + '\t' + '\t' + x.id)
+                res = collections.ChainMap(x.name, x.id)
+                print(res.maps,'\n')
         else:
             print("Invalid input")
             exit()   
@@ -199,67 +185,46 @@ elif(menuSelect == '2' and deckSel == '2'):
             print(" ")
             print("Cards and their mana cost: ")
             for x in randCards:
-                if(not randomCards.manaCost()):
-                    print(x + '\t' + 'None')
-                else:
-                    print(x + '\t' + randomCards.manaCost())
-            print(" ")
+                res = collections.ChainMap(x, randomCards.manaCost())
+                print(res.maps,'\n')
+
         if(displayOption == '2'):
             print(" ")
             print("Cards and their type: ")
             for x in randCards:
-                if(not randomCards.type()):
-                    print(x.name + '\t' + 'None')
-                else:
-                    print(x + '\t' + randomCards.type())
-            print(" ")
+                res = collections.ChainMap(x, randomCards.type())
+                print(res.maps,'\n')
         if(displayOption == '3'):
             print(" ")
             print("Cards and their supertype: ")
             for x in randCards:
-                if(not randomCards.supertype()):
-                    print(x.name + '\t' + 'None')
-                else:
-                    print(x + '\t' + randomCards.supertype())
-            print(" ")
+                res = collections.ChainMap(x, randomCards.supertype())
+                print(res.maps,'\n')
         if(displayOption == '4'):
             print(" ")
             print("Cards and their subtype: ")
             for x in randCards:
-                if(not randomCards.supertype()):
-                    print(x.name + '\t' + 'None')
-                else:
-                    print(x + '\t' + randomCards.subtype())
-            print(" ")
+                res = collections.ChainMap(x, randomCards.subtype())
+                print(res.maps,'\n')
         if(displayOption == '5'):
             print(" ")
             print("Cards and their rarity: ")
             for x in randCards:
-                if(not randomCards.rarity()):
-                    print(x.name + '\t' + 'None')
-                else:
-                    print(x + '\t' + randomCards.rarity())
-            print(" ")
+                res = collections.ChainMap(x, randomCards.rarity())
+                print(res.maps,'\n')
         if(displayOption == '6'):
             print(" ")
             print("Cards and their number: ")
             for x in randCards:
-                if(not randomCards.number()):
-                    print(x.name + '\t' + 'None')
-                else:
-                    print(x + '\t' + randomCards.number())
-            print(" ")
+                res = collections.ChainMap(x, randomCards.number())
+                print(res.maps,'\n')
         if(displayOption == '7'):
             print(" ")
             print("Cards and their ID: ")
             for x in randCards:
-                if(not randomCards.id()):
-                    print(x.name + '\t' + 'None')
-                else:
-                    print(x + '\t' + randomCards.id())
-            print(" ")
+                res = collections.ChainMap(x, randomCards.id())
+                print(res.maps,'\n')
         else:
-            print("Invalid Input")
             exit()
     else:
         print("Invalid Input")
@@ -285,7 +250,7 @@ elif(menuSelect == '3' and deckSel == '1'):
         pageNum3 = input("Select which page of cards to sort between 1 and 650: ")
         print(" ")
         cards3 = Card.where(page=pageNum3).where(pageSize=100).all()
-        cardList.append(cards3.cmc)
+        cardList.append(cards3)
     else:
         print("Invalid Input")
         exit()
@@ -298,8 +263,8 @@ elif(menuSelect == '3' and deckSel == '1'):
     if(sortChoice == '1'):
         #add the card info into an array
         cardsArr = []
-        #for x in cards3:
-        #    cardsArr.append(x.cmc)
+        for x in cards3:
+            cardsArr.append(x.cmc)
         #perform merge sort and display
         print("Cards sorted with merge sort: ")
         mergedCards = mergeSort.mergeSortAlg(cardList)
