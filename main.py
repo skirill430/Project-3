@@ -4,6 +4,7 @@ import time
 import string
 import collections
 import mergeSort
+import quickSort
 from randomCards import randomCards
 
 print("------------------------------------------------")
@@ -308,8 +309,7 @@ elif(menuSelect == '3' and deckSel == '1'):
             res = collections.ChainMap(i ,tempKey)
             print(res.maps,'\n')  
     elif(sortChoice == '2'):
-        #INSERT QUICK SORT CALL HERE
-                #add the card info into an array
+        #add the card info into an array
         cardsArr = []
         mapCards = {}
         cardTracker=[]
@@ -444,7 +444,7 @@ elif(menuSelect == '3' and deckSel == '2'):
             print(res.maps,'\n')   
     elif(sortChoice == '2'):
         #INSERT QUICK SORT CALL HERE
-        quickCards = quickSort.quickSortAlg(cmcList, 0, len(cmcList)-1)
+        quickSort.quickSortAlg(cmcList, 0, len(cmcList)-1)
         for i in cmcList:
             for key, value in mapCards.items():#dict can't change size
                 if(value == i):#equal to cmc1
