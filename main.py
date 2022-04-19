@@ -4,6 +4,7 @@ import time
 import string
 import collections
 import mergeSort
+import quickSort
 from randomCards import randomCards
 
 print("------------------------------------------------")
@@ -305,8 +306,28 @@ elif(menuSelect == '3' and deckSel == '1'):
             res = collections.ChainMap(i ,tempKey)
             print(res.maps,'\n')  
     elif(sortChoice == '2'):
-        #INSERT QUICK SORT CALL HERE
-        print(" ")
+        #add the card info into an array
+        cardsArr = []
+        mapCards = {}
+        cardTracker=[]
+        breakFor = False
+        for x in cards3: #for every card is list, get their mana cost
+            cardsArr.append(x.cmc)
+            mapCards[x.name] = x.cmc
+            cardTracker.append(x.name)
+        #perform quick sort and display
+        print("Cards sorted with quick sort: ")
+        quickCards = quickSort.quickSortAlg(cardsArr, 0, len(cardsArr)-1)
+        for i in cardsArr:
+            for key, value in mapCards.items():#dict can't change size
+                if(value == i):#equal to cmc1
+                    breakFor = False
+                    if (key in cardTracker):
+                        tempKey = key
+                        cardTracker.remove(key)
+                        break
+            res = collections.ChainMap(i ,tempKey)
+            print(res.maps,'\n')  
     elif(sortChoice == '3'):
         #CALL MERGE AND TIME
         mergestart = time.time()
