@@ -280,7 +280,10 @@ elif(menuSelect == '3' and deckSel == '1'):
     print("1. Merge Sort")
     print("2. Quick Sort")
     print("3. Time of both algorithms")
+    print(" ")
     sortChoice = input("Select: ")
+    print("------------------------------------------------")
+    print(" ")
     if(sortChoice == '1'):
         #add the card info into an array
         cardsArr = []
@@ -332,7 +335,7 @@ elif(menuSelect == '3' and deckSel == '1'):
             res = collections.ChainMap(i ,tempKey)
             print(res.maps,'\n')
         mergeend = time.time()
-        print("Merge sort computation:")
+        print("Merge sort computation: (in seconds)")
         print(round(mergeend - mergestart,5))
         #CALL QUICK AND TIME
         #PRINT THEIR TIMES
@@ -346,9 +349,11 @@ elif(menuSelect == '3' and deckSel == '2'):
     print(" ")
     print("Select which option to sort: ")
     print("1. All cards")
-    print("2. Number of cards: ")
+    print("2. Certain number of cards")
     print(" ")
     sizeSel = input("Select: ")
+    print("------------------------------------------------")
+    print(" ")
     randCardList = []
     cmcList = []
     if sizeSel == '1':
@@ -368,6 +373,7 @@ elif(menuSelect == '3' and deckSel == '2'):
     print("1. Merge Sort")
     print("2. Quick Sort")
     print("3. Time of both algorithms")
+    print(" ")
     sortChoice = input("Select: ")
     if(sortChoice == '1'):
         #perform merge sort and display
