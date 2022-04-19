@@ -1,1 +1,1 @@
-# Project-3
+# Magic the Gathering Cards: Project 3
