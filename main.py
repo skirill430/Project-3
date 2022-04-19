@@ -1,5 +1,7 @@
 from mtgsdk import Card
 from array import array
+import time 
+import string
 import collections
 import mergeSort
 from randomCards import randomCards
@@ -241,16 +243,35 @@ elif(menuSelect == '3' and deckSel == '1'):
     sizeSel = input("Select: ")
     cardList = []
     if sizeSel == '1':
-        for x in range(650):
-            cardsAll = Card.where(page=x).where(pageSize=100).all()
-        #Add all the cards to a list
-        for i in cardsAll:
-            cardList.append(i.name)
+        cards3 = []
+        count = 0
+        for x in range(1310):
+            count = count + 1
+            #checkpoints to stop the count
+            if(count == 250):
+                checkContinue = input("Continue? Y/N:")
+                if(checkContinue == 'Y'):
+                    continue
+                else:
+                    break
+            elif(count == 500):
+                checkContinue = input("Continue? Y/N:")
+                if(checkContinue == 'Y'):
+                    continue
+                else:
+                    break
+            elif(count == 1000):
+                checkContinue = input("Continue? Y/N:")
+                if(checkContinue == 'Y'):
+                    continue
+                else:
+                    break
+            cards3 = cards3 + Card.where(page=x).where(pageSize=50).all() 
+        #Add all the cards to a list// have to display every page
     elif sizeSel == '2':
         pageNum3 = input("Select which page of cards to sort between 1 and 650: ")
         print(" ")
         cards3 = Card.where(page=pageNum3).where(pageSize=100).all()
-        cardList.append(cards3)
     else:
         print("Invalid Input")
         exit()
@@ -263,20 +284,56 @@ elif(menuSelect == '3' and deckSel == '1'):
     if(sortChoice == '1'):
         #add the card info into an array
         cardsArr = []
-        for x in cards3:
+        mapCards = {}
+        cardTracker=[]
+        breakFor = False
+        for x in cards3: #for every card is list, get their mana cost
             cardsArr.append(x.cmc)
+            mapCards[x.name] = x.cmc
+            cardTracker.append(x.name)
         #perform merge sort and display
         print("Cards sorted with merge sort: ")
-        mergedCards = mergeSort.mergeSortAlg(cardList)
+        mergedCards = mergeSort.mergeSortAlg(cardsArr)
         for i in mergedCards:
-            print(i)
-            
-
+            for key, value in mapCards.items():#dict can't change size
+                if(value == i):#equal to cmc1
+                    breakFor = False
+                    if (key in cardTracker):
+                        tempKey = key
+                        cardTracker.remove(key)
+                        break
+            res = collections.ChainMap(i ,tempKey)
+            print(res.maps,'\n')  
     elif(sortChoice == '2'):
         #INSERT QUICK SORT CALL HERE
         print(" ")
     elif(sortChoice == '3'):
         #CALL MERGE AND TIME
+        mergestart = time.time()
+        cardsArr = []
+        mapCards = {}
+        cardTracker=[]
+        breakFor = False
+        for x in cards3: #for every card is list, get their mana cost
+            cardsArr.append(x.cmc)
+            mapCards[x.name] = x.cmc
+            cardTracker.append(x.name)
+        #perform merge sort and display
+        print("Cards sorted with merge sort: ")
+        mergedCards = mergeSort.mergeSortAlg(cardsArr)
+        for i in mergedCards:
+            for key, value in mapCards.items():#dict can't change size
+                if(value == i):#equal to cmc1
+                    breakFor = False
+                    if (key in cardTracker):
+                        tempKey = key
+                        cardTracker.remove(key)
+                        break
+            res = collections.ChainMap(i ,tempKey)
+            print(res.maps,'\n')
+        mergeend = time.time()
+        print("Merge sort computation:")
+        print(round(mergeend - mergestart,5))
         #CALL QUICK AND TIME
         #PRINT THEIR TIMES
         print(" ")
@@ -318,9 +375,9 @@ elif(menuSelect == '3' and deckSel == '2'):
         mergedCardsRand = mergeSort.mergeSortAlg(cmcList)
         for i in mergedCardsRand:
             for y in randCardList:
-                print(y + '\t')
-                #GET THESE TO PRINT ONE AT A TIME
-            print(i)
+                res = collections.ChainMap(i, y)
+                print(res.maps,'\n')
+                #GET THESE TO PRINT ONE AT A TIME// fix all cards
     elif(sortChoice == '2'):
         #INSERT QUICK SORT CALL HERE
         print(" ")
