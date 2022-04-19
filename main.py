@@ -309,7 +309,28 @@ elif(menuSelect == '3' and deckSel == '1'):
             print(res.maps,'\n')  
     elif(sortChoice == '2'):
         #INSERT QUICK SORT CALL HERE
-        print(" ")
+                #add the card info into an array
+        cardsArr = []
+        mapCards = {}
+        cardTracker=[]
+        breakFor = False
+        for x in cards3: #for every card is list, get their mana cost
+            cardsArr.append(x.cmc)
+            mapCards[x.name] = x.cmc
+            cardTracker.append(x.name)
+        #perform quick sort and display
+        print("Cards sorted with quick sort: ")
+        quickCards = quickSort.quickSortAlg(cardsArr, 0, len(cardsArr)-1)
+        for i in cardsArr:
+            for key, value in mapCards.items():#dict can't change size
+                if(value == i):#equal to cmc1
+                    breakFor = False
+                    if (key in cardTracker):
+                        tempKey = key
+                        cardTracker.remove(key)
+                        break
+            res = collections.ChainMap(i ,tempKey)
+            print(res.maps,'\n')  
     elif(sortChoice == '3'):
         #CALL MERGE AND TIME
         mergestart = time.time()
@@ -335,10 +356,36 @@ elif(menuSelect == '3' and deckSel == '1'):
             res = collections.ChainMap(i ,tempKey)
             print(res.maps,'\n')
         mergeend = time.time()
+        #CALL QUICK AND TIME
+        quickstart = time.time()
+        cardsArr = []
+        mapCards = {}
+        cardTracker=[]
+        breakFor = False
+        for x in cards3: #for every card is list, get their mana cost
+            cardsArr.append(x.cmc)
+            mapCards[x.name] = x.cmc
+            cardTracker.append(x.name)
+        #perform quick sort and display
+        print("Cards sorted with quick sort: ")
+        quickCards = quickSort.quickSortAlg(cardsArr, 0, len(cardsArr)-1)
+        for i in cardsArr:
+            for key, value in mapCards.items():#dict can't change size
+                if(value == i):#equal to cmc1
+                    breakFor = False
+                    if (key in cardTracker):
+                        tempKey = key
+                        cardTracker.remove(key)
+                        break
+            res = collections.ChainMap(i ,tempKey)
+            print(res.maps,'\n')  
+        quickend = time.time()
+        print(" ")
+        #PRINT THEIR TIMES
         print("Merge sort computation: (in seconds)")
         print(round(mergeend - mergestart,5))
-        #CALL QUICK AND TIME
-        #PRINT THEIR TIMES
+        print("Merge sort computation: (in seconds)")
+        print(round(quickend - quickstart,5))
         print(" ")
 
 
@@ -356,15 +403,22 @@ elif(menuSelect == '3' and deckSel == '2'):
     print(" ")
     randCardList = []
     cmcList = []
+    mapCards = {}
     if sizeSel == '1':
         for i in range(100000):
-            randCardList.append(randomCards.name())
-            cmcList.append(randomCards.cost())
+            tempName = randomCards.name()
+            tempCost = randomCards.cost()
+            randCardList.append(tempName)
+            cmcList.append(tempCost)
+            mapCards[tempName]=tempCost
     elif sizeSel == '2':
         numCardsSort = input("How many cards: ")
         for i in range(int(numCardsSort)):
-            randCardList.append(randomCards.name())
-            cmcList.append(randomCards.cost())
+            tempName = randomCards.name()
+            tempCost = randomCards.cost()
+            randCardList.append(tempName)
+            cmcList.append(tempCost)
+            mapCards[tempName]=tempCost
     else:
         print("Invalid Input")
         exit()
@@ -380,17 +434,64 @@ elif(menuSelect == '3' and deckSel == '2'):
         print("Mana Cost sorted with merge sort: ")
         mergedCardsRand = mergeSort.mergeSortAlg(cmcList)
         for i in mergedCardsRand:
-            for y in randCardList:
-                res = collections.ChainMap(i, y)
-                print(res.maps,'\n')
-                #GET THESE TO PRINT ONE AT A TIME// fix all cards
+            for key, value in mapCards.items():#dict can't change size
+                if(value == i):#equal to cmc1
+                    if (key in randCardList):
+                        tempKey = key
+                        randCardList.remove(key)
+                        break
+            res = collections.ChainMap(i ,tempKey)
+            print(res.maps,'\n')   
     elif(sortChoice == '2'):
         #INSERT QUICK SORT CALL HERE
-        print(" ")
+        quickCards = quickSort.quickSortAlg(cmcList, 0, len(cmcList)-1)
+        for i in cmcList:
+            for key, value in mapCards.items():#dict can't change size
+                if(value == i):#equal to cmc1
+                    breakFor = False
+                    if (key in randCardList):
+                        tempKey = key
+                        randCardList.remove(key)
+                        break
+            res = collections.ChainMap(i ,tempKey)
+            print(res.maps,'\n')  
     elif(sortChoice == '3'):
         #CALL MERGE AND TIME
+        mergestart = time.time()
+        print("Mana Cost sorted with merge sort: ")
+        mergedCardsRand = mergeSort.mergeSortAlg(cmcList)
+        for i in mergedCardsRand:
+            for key, value in mapCards.items():#dict can't change size
+                if(value == i):#equal to cmc1
+                    if (key in randCardList):
+                        tempKey = key
+                        randCardList.remove(key)
+                        break
+            res = collections.ChainMap(i ,tempKey)
+            print(res.maps,'\n')  
+        mergeend = time.time()
+        print("Merge sort computation: (in seconds)")
+        print(round(mergeend - mergestart,5))
         #CALL QUICK AND TIME
+        quickstart = time.time()
+        quickCards = quickSort.quickSortAlg(cmcList, 0, len(cmcList)-1)
+        for i in cmcList:
+            for key, value in mapCards.items():#dict can't change size
+                if(value == i):#equal to cmc1
+                    breakFor = False
+                    if (key in randCardList):
+                        tempKey = key
+                        randCardList.remove(key)
+                        break
+            res = collections.ChainMap(i ,tempKey)
+            print(res.maps,'\n')  
+        quickend = time.time()
         #PRINT THEIR TIMES
+        print("Merge sort computation: (in seconds)")
+        print(round(mergeend - mergestart,5))
+        print("Quick sort computation: (in seconds)")
+        print(round(quickend - quickstart,5))
+        print(" ")
         print(" ")
 else:
     exit()
