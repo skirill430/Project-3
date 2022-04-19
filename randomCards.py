@@ -27,7 +27,7 @@ class randomCards:
     def cost():
         #get random page to choose existing mana cost 
         cardsMana = Card.where(page = randint(1, 1200)).where(pageSize=50).all()
-        manaRandNum = randint(1, 50)
+        manaRandNum = randint(1, 15)
         #get numerical mana value
         cost = cardsMana[manaRandNum].cmc
         return cost
