@@ -406,6 +406,26 @@ elif(deckSel == '2' and menuSelect == '3'):
     mapCards = {}
     if sizeSel == '1':
         for i in range(100000):
+            count = count + 1
+            #checkpoints to stop the count
+            if(count == 250):
+                checkContinue = input("Continue? Y/N:")
+                if(checkContinue == 'Y'):
+                    continue
+                else:
+                    break
+            elif(count == 500):
+                checkContinue = input("Continue? Y/N:")
+                if(checkContinue == 'Y'):
+                    continue
+                else:
+                    break
+            elif(count == 1000):
+                checkContinue = input("Continue? Y/N:")
+                if(checkContinue == 'Y'):
+                    continue
+                else:
+                    break
             tempName = randomCards.name()
             tempCost = randomCards.cost()
             randCardList.append(tempName)
