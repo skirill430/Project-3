@@ -30,7 +30,8 @@ menuSelect = input ("Select: ")
 print("------------------------------------------------")
 #Display all normal cards
 if(menuSelect == '1' and deckSel == '1'): 
-    print("You've selected to display all cards!")
+    print("You've selected to display all normal cards!")
+    print(" ")
     print("The cards: ")
     pageNum = 0
     count1 = 0
@@ -49,8 +50,8 @@ if(menuSelect == '1' and deckSel == '1'):
             print(i.name)
 
 #Display all exclusive cards
-elif(menuSelect == '1' and deckSel == '2'): 
-    print("You've selected to display all cards!")
+elif(deckSel == '2' and menuSelect == '1'): 
+    print("You've selected to display all exclusive cards!")
     print("The cards: ")
     count = 0
     #loop through 100,000 data points
@@ -58,20 +59,20 @@ elif(menuSelect == '1' and deckSel == '2'):
         count = count + 1
         #checkpoints to stop the count
         if(count == 500):
-            checkContinue = input("Continue? Y/N:")
-            if(checkContinue == 'Y'):
+            checkContinue = input("At 500, Continue? Y/N:")
+            if(checkContinue == 'Y' or checkContinue == 'y'):
                 continue
             else:
                 exit()
         elif(count == 1000):
-            checkContinue = input("Continue? Y/N:")
-            if(checkContinue == 'Y'):
+            checkContinue = input("At 1000, Continue? Y/N:")
+            if(checkContinue == 'Y' or checkContinue == 'y'):
                 continue
             else:
                 exit()
         elif(count == 2000):
-            checkContinue = input("Continue? Y/N:")
-            if(checkContinue == 'Y'):
+            checkContinue = input("At 2000, Continue? Y/N:")
+            if(checkContinue == 'Y' or checkContinue == 'y'):
                 continue
             else:
                 exit()
@@ -79,7 +80,7 @@ elif(menuSelect == '1' and deckSel == '2'):
         print(randomCards.name())
 
 #Display normal cards of a certain page 
-elif(menuSelect == '2' and deckSel == '1'):
+elif(deckSel == '1' and menuSelect == '2'):
     print("You've selected to display a page of cards!")
     print(" ")
     pageNum = input("Select a page number between 1 and 1310: ")
@@ -155,9 +156,10 @@ elif(menuSelect == '2' and deckSel == '1'):
     else:
         print("Invalid Input")
         exit()
+
 #Display random cards in certain amount
-elif(menuSelect == '2' and deckSel == '2'):
-    print("You've selected to display a page of cards!")
+elif(deckSel == '2' and menuSelect == '2'):
+    print("You've selected to display a selection of exclusive cards!")
     print(" ")
     totalNum = input("Select an amount of cards: ")
     print(" ")
@@ -234,7 +236,7 @@ elif(menuSelect == '2' and deckSel == '2'):
         exit()
 
 #Sort the normal cards
-elif(menuSelect == '3' and deckSel == '1'):
+elif(deckSel == '1' and menuSelect == '3'):
     print("You've selected to sort cards by mana cost!")
     print(" ")
     print("Select which option to sort: ")
@@ -283,7 +285,6 @@ elif(menuSelect == '3' and deckSel == '1'):
     print("3. Time of both algorithms")
     print(" ")
     sortChoice = input("Select: ")
-    print("------------------------------------------------")
     print(" ")
     if(sortChoice == '1'):
         #add the card info into an array
@@ -296,7 +297,7 @@ elif(menuSelect == '3' and deckSel == '1'):
             mapCards[x.name] = x.cmc
             cardTracker.append(x.name)
         #perform merge sort and display
-        print("Cards sorted with merge sort: ")
+        print("Cards sorted by mana cost with merge sort: ")
         mergedCards = mergeSort.mergeSortAlg(cardsArr)
         for i in mergedCards:
             for key, value in mapCards.items():#dict can't change size
@@ -319,7 +320,7 @@ elif(menuSelect == '3' and deckSel == '1'):
             mapCards[x.name] = x.cmc
             cardTracker.append(x.name)
         #perform quick sort and display
-        print("Cards sorted with quick sort: ")
+        print("Cards sorted by mana cost with quick sort: ")
         quickCards = quickSort.quickSortAlg(cardsArr, 0, len(cardsArr)-1)
         for i in cardsArr:
             for key, value in mapCards.items():#dict can't change size
@@ -343,7 +344,7 @@ elif(menuSelect == '3' and deckSel == '1'):
             mapCards[x.name] = x.cmc
             cardTracker.append(x.name)
         #perform merge sort and display
-        print("Cards sorted with merge sort: ")
+        print("Merge Sort: ")
         mergedCards = mergeSort.mergeSortAlg(cardsArr)
         for i in mergedCards:
             for key, value in mapCards.items():#dict can't change size
@@ -367,7 +368,7 @@ elif(menuSelect == '3' and deckSel == '1'):
             mapCards[x.name] = x.cmc
             cardTracker.append(x.name)
         #perform quick sort and display
-        print("Cards sorted with quick sort: ")
+        print("Quick Sort: ")
         quickCards = quickSort.quickSortAlg(cardsArr, 0, len(cardsArr)-1)
         for i in cardsArr:
             for key, value in mapCards.items():#dict can't change size
@@ -384,14 +385,14 @@ elif(menuSelect == '3' and deckSel == '1'):
         #PRINT THEIR TIMES
         print("Merge sort computation: (in seconds)")
         print(round(mergeend - mergestart,5))
-        print("Merge sort computation: (in seconds)")
+        print("Quick sort computation: (in seconds)")
         print(round(quickend - quickstart,5))
         print(" ")
 
 
 
 #Sort the random cards
-elif(menuSelect == '3' and deckSel == '2'):
+elif(deckSel == '2' and menuSelect == '3'):
     print("You've selected to sort cards by mana cost!")
     print(" ")
     print("Select which option to sort: ")
@@ -399,7 +400,6 @@ elif(menuSelect == '3' and deckSel == '2'):
     print("2. Certain number of cards")
     print(" ")
     sizeSel = input("Select: ")
-    print("------------------------------------------------")
     print(" ")
     randCardList = []
     cmcList = []
@@ -412,7 +412,7 @@ elif(menuSelect == '3' and deckSel == '2'):
             cmcList.append(tempCost)
             mapCards[tempName]=tempCost
     elif sizeSel == '2':
-        numCardsSort = input("How many cards: ")
+        numCardsSort = input("Number of cards: ")
         for i in range(int(numCardsSort)):
             tempName = randomCards.name()
             tempCost = randomCards.cost()
@@ -429,9 +429,10 @@ elif(menuSelect == '3' and deckSel == '2'):
     print("3. Time of both algorithms")
     print(" ")
     sortChoice = input("Select: ")
+    print(" ")
     if(sortChoice == '1'):
         #perform merge sort and display
-        print("Mana Cost sorted with merge sort: ")
+        print("Cards sorted by mana cost with merge sort: ")
         mergedCardsRand = mergeSort.mergeSortAlg(cmcList)
         for i in mergedCardsRand:
             for key, value in mapCards.items():#dict can't change size
@@ -443,7 +444,7 @@ elif(menuSelect == '3' and deckSel == '2'):
             res = collections.ChainMap(i ,tempKey)
             print(res.maps,'\n')   
     elif(sortChoice == '2'):
-        #INSERT QUICK SORT CALL HERE
+        print("Cards sorted by mana cost with quick sort: ")
         quickSort.quickSortAlg(cmcList, 0, len(cmcList)-1)
         for i in cmcList:
             for key, value in mapCards.items():#dict can't change size
@@ -456,9 +457,8 @@ elif(menuSelect == '3' and deckSel == '2'):
             res = collections.ChainMap(i ,tempKey)
             print(res.maps,'\n')  
     elif(sortChoice == '3'):
-        #CALL MERGE AND TIME
         mergestart = time.time()
-        print("Mana Cost sorted with merge sort: ")
+        print("Merge sort: ")
         mergedCardsRand = mergeSort.mergeSortAlg(cmcList)
         for i in mergedCardsRand:
             for key, value in mapCards.items():#dict can't change size
@@ -470,9 +470,10 @@ elif(menuSelect == '3' and deckSel == '2'):
             res = collections.ChainMap(i ,tempKey)
             print(res.maps,'\n')  
         mergeend = time.time()
-        print("Merge sort computation: (in seconds)")
-        print(round(mergeend - mergestart,5))
+        #print("Merge sort computation:")
+        #print(round(mergeend - mergestart,5))
         #CALL QUICK AND TIME
+        print("Quick Sort: ")
         quickstart = time.time()
         quickCards = quickSort.quickSortAlg(cmcList, 0, len(cmcList)-1)
         for i in cmcList:
