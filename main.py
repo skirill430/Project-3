@@ -5,6 +5,8 @@ import string
 import collections
 import mergeSort
 import quickSort
+import sys
+sys.setrecursionlimit(30000)
 from randomCards import randomCards
 
 print("------------------------------------------------")
@@ -333,6 +335,7 @@ elif(deckSel == '1' and menuSelect == '3'):
             res = collections.ChainMap(i ,tempKey)
             print(res.maps,'\n')  
     elif(sortChoice == '3'):
+        print("Running sorts")
         #CALL MERGE AND TIME
         mergestart = time.time()
         cardsArr = []
@@ -344,7 +347,7 @@ elif(deckSel == '1' and menuSelect == '3'):
             mapCards[x.name] = x.cmc
             cardTracker.append(x.name)
         #perform merge sort and display
-        print("Merge Sort: ")
+        #print("Merge Sort: ")
         mergedCards = mergeSort.mergeSortAlg(cardsArr)
         for i in mergedCards:
             for key, value in mapCards.items():#dict can't change size
@@ -355,7 +358,7 @@ elif(deckSel == '1' and menuSelect == '3'):
                         cardTracker.remove(key)
                         break
             res = collections.ChainMap(i ,tempKey)
-            print(res.maps,'\n')
+            #print(res.maps,'\n')
         mergeend = time.time()
         #CALL QUICK AND TIME
         quickstart = time.time()
@@ -368,7 +371,7 @@ elif(deckSel == '1' and menuSelect == '3'):
             mapCards[x.name] = x.cmc
             cardTracker.append(x.name)
         #perform quick sort and display
-        print("Quick Sort: ")
+        #print("Quick Sort: ")
         quickCards = quickSort.quickSortAlg(cardsArr, 0, len(cardsArr)-1)
         for i in cardsArr:
             for key, value in mapCards.items():#dict can't change size
@@ -379,7 +382,7 @@ elif(deckSel == '1' and menuSelect == '3'):
                         cardTracker.remove(key)
                         break
             res = collections.ChainMap(i ,tempKey)
-            print(res.maps,'\n')  
+            #print(res.maps,'\n')  
         quickend = time.time()
         print(" ")
         #PRINT THEIR TIMES
@@ -479,7 +482,8 @@ elif(deckSel == '2' and menuSelect == '3'):
             print(res.maps,'\n')  
     elif(sortChoice == '3'):
         mergestart = time.time()
-        print("Merge sort: ")
+        print("Running Sorts")
+        #print("Merge sort: ")
         mergedCardsRand = mergeSort.mergeSortAlg(cmcList)
         for i in mergedCardsRand:
             for key, value in mapCards.items():#dict can't change size
@@ -489,12 +493,12 @@ elif(deckSel == '2' and menuSelect == '3'):
                         randCardList.remove(key)
                         break
             res = collections.ChainMap(i ,tempKey)
-            print(res.maps,'\n')  
+            #print(res.maps,'\n')  
         mergeend = time.time()
         #print("Merge sort computation:")
         #print(round(mergeend - mergestart,5))
         #CALL QUICK AND TIME
-        print("Quick Sort: ")
+        #print("Quick Sort: ")
         quickstart = time.time()
         quickCards = quickSort.quickSortAlg(cmcList, 0, len(cmcList)-1)
         for i in cmcList:
@@ -506,7 +510,7 @@ elif(deckSel == '2' and menuSelect == '3'):
                         randCardList.remove(key)
                         break
             res = collections.ChainMap(i ,tempKey)
-            print(res.maps,'\n')  
+            #print(res.maps,'\n')  
         quickend = time.time()
         #PRINT THEIR TIMES
         print("Merge sort computation: (in seconds)")

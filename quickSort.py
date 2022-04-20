@@ -1,4 +1,6 @@
 from mtgsdk import Card
+import sys
+sys.setrecursionlimit(30000)
 
 def quickSortAlg(cardList, down, up):
     #if there's only one elememt
