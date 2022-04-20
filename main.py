@@ -404,6 +404,7 @@ elif(deckSel == '2' and menuSelect == '3'):
     randCardList = []
     cmcList = []
     mapCards = {}
+    count = 0
     if sizeSel == '1':
         for i in range(100000):
             count = count + 1
